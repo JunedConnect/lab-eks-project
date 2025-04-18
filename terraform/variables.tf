@@ -77,7 +77,7 @@ variable "instance-disk-size" {
 variable "instance-types" {
   description = "List of instance types to be used within the cluster"
   type        = list(string)
-  default     = ["t3.medium"]
+  default     = ["t3.large"]
 }
 
 
