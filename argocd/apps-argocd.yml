@@ -8,7 +8,7 @@ spec:
 
   source:
     repoURL: "https://github.com/JunedConnect/lab-eks-project.git"
-    targetRevision: HEAD #change this back to HEAD or main as this is the branch that argocd will be using
+    targetRevision: dev #change this back to HEAD or main as this is the branch that argocd will be using
     path: argocd/apps
 
   destination:
