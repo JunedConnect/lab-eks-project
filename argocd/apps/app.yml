@@ -1,0 +1,80 @@
+# namespace create
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: myapp-ns
+
+---
+
+# deployment create
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-deployment
+  namespace: myapp-ns
+  labels:
+    app: myapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - name: myapp
+        image: 677276074604.dkr.ecr.eu-west-2.amazonaws.com/threat-composer-tool #junjiahmed/threat-composer-app:v1.0
+        ports:
+        - containerPort: 3000
+
+---
+
+# clusterIP create
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-svc
+  namespace: myapp-ns
+spec:
+  selector:
+    app: myapp
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 3000
+  type: ClusterIP
+
+---
+
+# ingress create
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-ingress
+  namespace: myapp-ns # this has to be the same namespace as the service that you are trying to route traffic to
+  annotations:
+    cert-manager.io/cluster-issuer: "issuer"
+spec:
+  ingressClassName: nginx # this has to be the same ingressClassName as your ingresscontroller
+  rules:
+  - host: app.lab.juned.co.uk
+    http:
+      paths:
+       - path: /
+         pathType: Prefix
+         backend:
+          service:
+            name: myapp-svc
+            port:
+              number: 80
+  tls:
+  - hosts:
+    - app.lab.juned.co.uk
+    secretName: app-tls
