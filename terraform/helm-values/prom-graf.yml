@@ -1,0 +1,34 @@
+prometheus:
+  enabled: true
+  service:
+    type: ClusterIP
+  ingress:
+    enabled: true
+    ingressClassName: "nginx"
+    annotations:
+      nginx.org/hsts: "false"
+      cert-manager.io/cluster-issuer: issuer
+    hosts:
+      - prometheus.lab.juned.co.uk
+    tls:
+      - secretName: prometheus-ingress-tls
+        hosts:
+        - prometheus.lab.juned.co.uk
+
+
+grafana:
+  enabled: true
+  service:
+    type: ClusterIP
+  ingress:
+    enabled: true
+    ingressClassName: "nginx"
+    annotations:
+      nginx.org/hsts: "false"
+      cert-manager.io/cluster-issuer: issuer
+    hosts:
+      - grafana.lab.juned.co.uk
+    tls:
+      - secretName: grafana-ingress-tls
+        hosts:
+        - grafana.lab.juned.co.uk

@@ -1,15 +1,15 @@
 module "eks" {
-  source = "terraform-aws-modules/eks/aws"
+  source  = "terraform-aws-modules/eks/aws"
   version = "~> 20.31"
 
-  cluster_name                             = var.name
-  cluster_version                          = "1.31"
+  cluster_name    = var.name
+  cluster_version = var.cluster-version
 
-  cluster_endpoint_public_access_cidrs     = [var.public-access-cidrs] 
-  cluster_endpoint_public_access           = true # make it into a variable later
-  enable_cluster_creator_admin_permissions = true # make it into a variable later
+  cluster_endpoint_public_access_cidrs     = [var.public-access-cidrs]
+  cluster_endpoint_public_access           = var.cluster-public-access
+  enable_cluster_creator_admin_permissions = var.cluster-admin-permissions
 
-  enable_irsa = true # make it into a variable later
+  enable_irsa = var.enable-irsa
 
   vpc_id                   = module.vpc.vpc_id
   subnet_ids               = module.vpc.private_subnets

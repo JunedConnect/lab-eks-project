@@ -4,15 +4,15 @@ metadata:
   name: issuer
 spec:
   acme:
-    server: "https://acme-staging-v02.api.letsencrypt.org/directory" # the following is the production server: "https://acme-v02.api.letsencrypt.org/directory"
+    server: "https://acme-v02.api.letsencrypt.org/directory" # the following is the production server: "https://acme-v02.api.letsencrypt.org/directory" and following is the staging server: "https://acme-staging-v02.api.letsencrypt.org/directory"
     email: "junedwork@hotmail.com"
     privateKeySecretRef:
       name: issuer
     solvers:
     - dns01:
-        route53:
-          hostedZoneID: Z097184339VWV0V8O5B3D #this must be updated with the current hostedZoneID in order for it to work
-          region: eu-west-2
+        route53: {} # remove these {} if you want to use the hostedZoneID and region here
+#          hostedZoneID: Z034483523VVS6ZNZUT1C #this must be updated with the current hostedZoneID in order for it to work
+#          region: eu-west-2
       selector:
         dnsZones:
         - "lab.juned.co.uk"
