@@ -140,5 +140,4 @@ To trigger any of these workflows, navigate to **GitHub Actions** and manually r
 |Prometheus:|
 | ![Prometheus](https://raw.githubusercontent.com/JunedConnect/lab-eks-project/main/images/Prometheus%20Page.png) |
 |Grafana Dashboard:|
-| ![Grafana](https://raw.githubusercontent.com/JunedConnect/lab-eks-project/main/images/Grafana%20Dashboard%20.png) |
-|Prometheus:|
+| ![Grafana](https://raw.githubusercontent.com/JunedConnect/lab-eks-project/main/images/Grafana%20Dashboard.png) |
