@@ -10,7 +10,7 @@ on:
 
 
 jobs:
-    terraformapply:
+    terraformplan:
         runs-on: ubuntu-latest
         defaults:
             run:
@@ -32,7 +32,7 @@ jobs:
 
             - name: Download terraform.tfvars from S3 Bucket
               run: |
-                aws s3 cp s3://terraform-state-ecs-project-charlie/terraform.tfvars .
+                aws s3 cp s3://tf-state-eks-project/terraform.tfvars .
   
             - name: Setup Tflint
               uses: terraform-linters/setup-tflint@master

@@ -30,7 +30,7 @@ jobs:
 
             - name: Download terraform.tfvars from S3 Bucket
               run: |
-                aws s3 cp s3://terraform-state-eks-project-charlie/terraform.tfvars .
+                aws s3 cp s3://tf-state-eks-project/terraform.tfvars .
 
             - name: Set up Terraform
               uses: hashicorp/setup-terraform@v3
@@ -43,11 +43,16 @@ jobs:
             - name: Terraform Apply
               run: terraform apply -auto-approve
 
+    # kubernetes:
+    #     runs-on: ubuntu-latest
+    #     environment: aws
+
+    #     steps:
             - name: Update kubeconfig for EKS cluster
               run: aws eks update-kubeconfig --name ${{ secrets.EKS_CLUSTER_NAME }} --region ${{ secrets.AWS_REGION }}
-      
+
             - name: Deploy Cert-Manager issuer.yaml
-              run: kubectl apply -f cert-man/issuer.yml
-      
-            - name: Deploy ArgoCD App Deployment app-argo.yaml
-              run: kubectl apply -f argocd/app-argo.yml
+              run: kubectl apply -f ../cert-man/issuer.yml
+
+            - name: Deploy ArgoCD App Deployment apps-argocd.yaml
+              run: kubectl apply -f ../argocd/apps-argocd.yml

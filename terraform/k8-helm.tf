@@ -49,7 +49,8 @@ resource "helm_release" "external-dns" {
   depends_on = [ # this is required so that once all kubernetes related resources are destroyed, externaldns can then delete the records associated with them. If externaldns is removed before the other kubernetes resources, the records will not be removed. This will cause a problem when you try and destroy your terraform resources and terraform will not be able to destroy the route53 resource due to existing records.
     helm_release.cert-manager,
     helm_release.nginx-ingress-controller,
-    helm_release.argocd
+    helm_release.argocd,
+    helm_release.prom-graf
   ]
 }
 
@@ -76,6 +77,10 @@ resource "helm_release" "argocd" {
 
   values = [
     file(var.argocd-helm-values-file-path)
+  ]
+
+  depends_on = [
+    helm_release.nginx-ingress-controller,
   ]
 }
 
