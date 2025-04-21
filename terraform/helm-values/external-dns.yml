@@ -1,0 +1,9 @@
+provider: aws
+policy: sync # this will create and delete the records within Route 53
+
+env:
+- name: AWS_DEFAULT_REGION
+  value: eu-west-2
+
+domainFilters:
+- lab.juned.co.uk
