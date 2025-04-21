@@ -43,6 +43,11 @@ jobs:
             - name: Terraform Apply
               run: terraform apply -auto-approve
 
+    kubernetes:
+        runs-on: ubuntu-latest
+        environment: aws
+
+        steps:
             - name: Update kubeconfig for EKS cluster
               run: aws eks update-kubeconfig --name ${{ secrets.EKS_CLUSTER_NAME }} --region ${{ secrets.AWS_REGION }}
       
