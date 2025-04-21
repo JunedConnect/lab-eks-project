@@ -18,7 +18,7 @@ jobs:
         environment: aws
         permissions:
           security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
-
+    
         steps:
             - name: Checkout
               uses: actions/checkout@v4
@@ -33,18 +33,18 @@ jobs:
             - name: Download terraform.tfvars from S3 Bucket
               run: |
                 aws s3 cp s3://terraform-state-ecs-project-charlie/terraform.tfvars .
-
+  
             - name: Setup Tflint
               uses: terraform-linters/setup-tflint@master
-              with:
+              with: 
                 tflint_version: latest
-
+  
             - name: TFlint Scan   #See this link for command flags https://github.com/terraform-linters/tflint and https://github.com/terraform-linters/tflint/blob/master/docs/user-guide/config.md#format
               run: |
                 touch tflint-results-terraform.sarif
                 tflint --recursive --color
               continue-on-error: true
-
+        
             - name: Checkov
               uses: bridgecrewio/checkov-action@master
               with:
@@ -52,7 +52,7 @@ jobs:
                 soft_fail: true   #Soft fail true means that the pipeline will stil continue to run regardless if a vulnerability was detected. Soft fail false would be the opposite where a detected vulnerability will cause the pipeline to stop running
                 output_format: cli,sarif
                 output_file_path: checkov-results-terraform.sarif
-
+                
             - name: Upload Checkov scan results to GitHub Security tab
               uses: github/codeql-action/upload-sarif@v3
               if: success() || failure()
