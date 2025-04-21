@@ -67,4 +67,4 @@ spec:
   tls:
   - hosts:
     - app.lab.juned.co.uk
-    secretName: app-tls
+    secretName: app-ingress-tls
