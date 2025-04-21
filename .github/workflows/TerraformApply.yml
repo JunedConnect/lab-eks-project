@@ -55,4 +55,4 @@ jobs:
               run: kubectl apply -f ../cert-man/issuer.yml
 
             - name: Deploy ArgoCD App Deployment apps-argocd.yaml
-              run: kubectl apply -f ../argocd/apps-argocd.yml
+              run: kubectl apply -f ../argocd/argocd-git.yml
