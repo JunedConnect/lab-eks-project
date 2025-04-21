@@ -16,7 +16,7 @@ jobs:
             run:
                 working-directory: "./terraform/"
         environment: aws
-    
+
         steps:
             - name: Checkout
               uses: actions/checkout@v4
@@ -46,9 +46,9 @@ jobs:
             - name: Update kubeconfig for EKS cluster
               run: |
                 aws eks update-kubeconfig --name ${{ secrets.EKS_CLUSTER_NAME }} --region ${{ secrets.AWS_REGION }}
-      
+
             - name: Deploy Cert-Manager issuer.yaml
               run: kubectl apply -f cert-man/issuer.yml
-      
+
             - name: Deploy ArgoCD App Deployment app-argo.yaml
               run: kubectl apply -f argocd/app-argo.yml

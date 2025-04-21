@@ -1,6 +1,6 @@
-server: 
+server:
   extraArgs:
-  - --insecure 
+  - --insecure
   service:
     type: ClusterIP
   ingress:
