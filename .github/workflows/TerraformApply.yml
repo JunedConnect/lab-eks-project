@@ -44,8 +44,7 @@ jobs:
               run: terraform apply -auto-approve
 
             - name: Update kubeconfig for EKS cluster
-              run: |
-                aws eks update-kubeconfig --name ${{ secrets.EKS_CLUSTER_NAME }} --region ${{ secrets.AWS_REGION }}
+              run: aws eks update-kubeconfig --name ${{ secrets.EKS_CLUSTER_NAME }} --region ${{ secrets.AWS_REGION }}
       
             - name: Deploy Cert-Manager issuer.yaml
               run: kubectl apply -f cert-man/issuer.yml

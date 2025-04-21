@@ -1,0 +1,27 @@
+# To use the pre-commit hooks in this repository, follow these steps:
+#
+# 1. Install the pre-commit tool:
+#    pip install pre-commit
+#
+# 2. Install the hooks defined in .pre-commit-config.yaml (Run this whenever you make changes to the YAML config):
+#    pre-commit install
+#
+# 3. (Optional) Run the hooks on all files without committing:
+#    pre-commit run -a
+#
+# The pre-commit hooks will now automatically run before each commit.
+
+
+repos:
+
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.3.0
+    hooks:
+    -   id: check-yaml
+    -   id: trailing-whitespace
+
+- repo: https://github.com/antonbabenko/pre-commit-terraform
+  rev: v1.99.0 # Get the latest from: https://github.com/antonbabenko/pre-commit-terraform/releases
+  hooks:
+    - id: terraform_fmt
+    - id: terraform_tflint
