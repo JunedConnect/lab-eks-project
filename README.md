@@ -8,17 +8,18 @@ This project automates the deployment of the **Threat Composer App** using **AWS
 
 The **Threat Composer App** is a containerised Node.js application deployed on **AWS EKS** using **Helm** and **Argo CD**. The deployment process is fully automated using a **CI/CD pipeline** that handles Docker image building, vulnerability scanning, and deployment to AWS through **Terraform**.
 
+<br>
+
 This setup uses:
 
-**Cert Manager** to automate the issuance and renewal of TLS certificates
 
-**Argo CD** for GitOps-based deployments, ensuring the cluster always reflects the state defined in the Git repository.
+- **Cert Manager** to automate the issuance and renewal of TLS certificates
 
-**External DNS** to dynamically manage Route 53 records based on Kubernetes ingress resources, eliminating manual DNS configuration.
+- **External DNS** to dynamically manage Route 53 records based on Kubernetes ingress resources, eliminating manual DNS configuration.
 
-**Prometheus** is used to collect cluster metrics.
+- **Argo CD** for GitOps-based deployments, ensuring the cluster always reflects the state defined in the Git repository.
 
-**Grafana** to provide dashboards for visualising cluster metrics in real time.
+- **Prometheus & Grafana** to collect cluster metrics and provide dashboards for visualising cluster metrics in real time.
 
 <br>
 
